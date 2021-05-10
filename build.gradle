@@ -16,4 +16,6 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    compile 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 }
