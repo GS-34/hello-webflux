@@ -7,6 +7,7 @@ import reactor.core.publisher.BaseSubscriber;
 import reactor.core.publisher.Flux;
 
 import java.time.Duration;
+import java.time.Instant;
 
 @Slf4j
 public class Part1 {
@@ -42,7 +43,20 @@ public class Part1 {
         disposable.dispose();
         log.info("isDisposed : {}", disposable.isDisposed());
 
-        BaseSubscriber baseSubscriber;
+        System.out.println("========================================================");
+
+        Flux.range(2018,5)//2018~2022까지 생성 Flux<Integer>
+                .timestamp()//타임스템프 추가 Flux<Tuple2<Long, Integer>>
+                .index()//index 추가 Flux<Tuple2 <Long, Tuple2<Long, Integer>>
+                .subscribe(
+                        e-> log.info("index : {}, ts : {}, value : {}",
+                                e.getT1(),
+                                Instant.ofEpochMilli(e.getT2().getT1()),
+                                e.getT2().getT2())
+                );
+
+        System.out.println("========================================================");
+
     }
 
 }
