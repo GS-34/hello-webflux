@@ -13,8 +13,7 @@ public class Part4 {
         flux.reduce(0, (acc, elem) -> acc+elem)//최종결과만 onNext
                 .subscribe(e -> log.info("reduce result : {}", e));
 
-        flux
-                .scan(0, (acc, elem) -> acc+elem)//고ㅏ정도 함께 onNext
+        flux.scan(0, (acc, elem) -> acc+elem)//고ㅏ정도 함께 onNext
                 .subscribe(e -> log.info("scan result : {}", e));
 
     }
