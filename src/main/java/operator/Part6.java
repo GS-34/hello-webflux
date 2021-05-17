@@ -14,7 +14,7 @@ public class Part6 {
     public static void main(String[] args) throws InterruptedException {
 
         /**
-         * concat
+         * concat(flux 를 연결한다.)
          * Flux1 ,2,3 순차 subscribing
         * */
         log.info("=============concat===============");
