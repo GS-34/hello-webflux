@@ -13,18 +13,30 @@ public class Part6 {
 
     public static void main(String[] args) throws InterruptedException {
 
+//        concat();
+        merge();
+//        zip();
+
+
+
+
+
+    }
+
+    private static void concat(){
         /**
          * concat(flux 를 연결한다.)
          * Flux1 ,2,3 순차 subscribing
-        * */
+         * */
         log.info("=============concat===============");
         Flux.concat(
                 Flux.range(1,3),
                 Flux.range(4,2),
                 Flux.range(6,5)
         ).subscribe(e -> log.info("onNext :{}", e));
+    }
 
-
+    private static void merge() throws InterruptedException {
         /**
          * merge
          * 1,2,3 Flux 동시 subscribing
@@ -39,14 +51,14 @@ public class Part6 {
                         .parallel()
                         .runOn(Schedulers.parallel())
                         .doOnNext(
-                        e-> {
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException ex) {
-                                ex.printStackTrace();
-                            }
-                        }
-                ),
+                                e-> {
+                                    try {
+                                        Thread.sleep(1000);
+                                    } catch (InterruptedException ex) {
+                                        ex.printStackTrace();
+                                    }
+                                }
+                        ),
                 Flux.range(20,10).doOnNext(
                         e-> {
                             try {
@@ -58,6 +70,10 @@ public class Part6 {
                 )
         ).subscribe(e -> log.info("onNext :{}", e));
 
+        Thread.sleep(10000);
+    }
+
+    private static void zip(){
         log.info("=============zip===============");
 
         /**
@@ -71,7 +87,6 @@ public class Part6 {
 
 
         log.info("=============zip===============");
-
     }
 
 }

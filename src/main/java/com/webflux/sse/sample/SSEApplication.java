@@ -1,13 +1,13 @@
-package com.wally.webflux;
+package com.webflux.sse.sample;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WebfluxApplication {
+public class SSEApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WebfluxApplication.class, args);
+        SpringApplication.run(SSEApplication.class, args);
     }
 
 }
