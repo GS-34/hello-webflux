@@ -23,3 +23,7 @@ dependencies {
     testCompile('org.junit.jupiter:junit-jupiter-engine')
     testCompile('org.junit.jupiter:junit-jupiter-params')
 }
+
+springBoot {
+    mainClass = 'com.webflux.websocket.WebSocketApplication'
+}
