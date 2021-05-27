@@ -15,6 +15,18 @@ public class SecuredProfileController {
         profileService = service;
     }
 
+    /**
+     * 리액티브 스프링 보안 모듈에서 SecurityContext 에 접근하기 위해
+     * ReactiveSecurityContextHolder 라는 새로운 클래스를 사용
+     */
+    @GetMapping("/")
+    public Mono<String> index() {
+        return ReactiveSecurityContextHolder
+            .getContext()//SecurityContext Get
+            .map(SecurityContext::getAuthentication)//인증
+            .flatMap(auth -> Mono.just("Welcome   " + auth.getName() + "!!!"));
+    }
+
     @GetMapping("/profiles")
     public Mono<Profile> getProfile() {
         return ReactiveSecurityContextHolder
@@ -23,13 +35,5 @@ public class SecuredProfileController {
                 return  c.getAuthentication();
             })
             .flatMap(auth -> profileService.getByUser(auth.getName()));
-    }
-
-    @GetMapping("/")
-    public Mono<String> index() {
-        return ReactiveSecurityContextHolder
-            .getContext()
-            .map(SecurityContext::getAuthentication)
-            .flatMap(auth -> Mono.just("Welcome   " + auth.getName() + "!!!"));
     }
 }

@@ -10,6 +10,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
+/**
+ *  스프링 시큐리티는 컴포넌트 간의 리액티브 및 논블로킹 동작을 지원,
+ *  리액티브 방식으로 액세스를 제공하기 위해 새로운 WebFilter 인프라를 적용하고
+ *  리액터 컨택스트 기능에 크게 의존하는 새로운 리액티브를 구현하였다.
+ */
 @Configuration
 public class SecurityConfiguration {
 
@@ -39,13 +44,13 @@ public class SecurityConfiguration {
   public SecurityWebFilterChain securityFilterChainConfigurer(ServerHttpSecurity httpSecurity) {
     return httpSecurity
         .authorizeExchange()
-        .anyExchange().permitAll()
+        .anyExchange()
+        .permitAll()
         .and()
         .httpBasic()
         .and()
         .formLogin()
         .and()
-
         .build();
   }
 
